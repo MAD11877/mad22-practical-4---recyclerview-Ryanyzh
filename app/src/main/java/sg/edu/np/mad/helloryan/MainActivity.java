@@ -43,8 +43,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         Intent receive = getIntent();
-        Integer messageTxt = receive.getIntExtra("number", 0);
-        username.setText("MAD " + messageTxt);
+        String messageTxt = receive.getStringExtra("username");
+        username.setText(messageTxt);
+        String messageTxt1 = receive.getStringExtra("description");
+        description.setText(messageTxt1);
+        boolean status = receive.getBooleanExtra("following", false);
+        if (status){
+            user.followed = status;
+            follow.setText("Unfollow");
+        }
+        else{
+            user.followed = status;
+            follow.setText("Follow");
+        }
 
         Button message = (Button) findViewById(R.id.message_btn);
         message.setOnClickListener(new View.OnClickListener(){

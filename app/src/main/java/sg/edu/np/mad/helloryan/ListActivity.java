@@ -1,5 +1,7 @@
 package sg.edu.np.mad.helloryan;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -11,10 +13,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -29,7 +33,7 @@ public class ListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
 
-        List<User> userObjects = new LinkedList<>();
+        ArrayList<User> userObjects = new ArrayList<>();
 
 
         for (int u = 0; u < 20; u++)
@@ -38,7 +42,7 @@ public class ListActivity extends AppCompatActivity {
             boolean userFollowed;
             String userName = "Name";
             int userId = (int)random.nextInt(999999999);
-            String userDescription = "Description " + Double.toString(random.nextInt(999999999));
+            String userDescription = "Description " + Integer.toString(random.nextInt(999999999));
             int followInt = random.nextInt(2);
             if (followInt == 1)
             {
@@ -49,6 +53,11 @@ public class ListActivity extends AppCompatActivity {
                 userFollowed = false;
             }
             User newUser = new User (userName, userDescription, userId, userFollowed);
+            userObjects.add(newUser);
+        }
+
+        for (int h = 0; h < userObjects.size(); h++){
+            System.out.println(userObjects.get(h).followed);
         }
 
         RecyclerView rv = findViewById(R.id.rv_id);
@@ -58,38 +67,6 @@ public class ListActivity extends AppCompatActivity {
         rv.setItemAnimator(new DefaultItemAnimator());
         rv.setAdapter(adapter);
 
-        /*
-        ImageView clickThis = findViewById(R.id.userPicture);
-        clickThis.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(ListActivity.this);
-
-                builder.setTitle("Profile");
-                builder.setMessage("MADness");
-                builder.setCancelable(true);
-                builder.setPositiveButton("Close", new DialogInterface.OnClickListener(){
-                    public void onClick(DialogInterface dialog, int id){
-                        //<action>
-                    }
-                });
-                builder.setNegativeButton("View", new DialogInterface.OnClickListener(){
-                    public void onClick(DialogInterface dialog, int id){
-                        Intent i = new Intent(ListActivity.this, MainActivity.class);
-                        int x = (int)Math.floor(Math.random()*(1000001)+0);
-                        i.putExtra("number" , x);
-                        startActivity(i);
-                    }
-                });
-                AlertDialog alert = builder.create();
-                alert.show();
-
-
-
-            }
-        });
-
-         */
     }
 }
