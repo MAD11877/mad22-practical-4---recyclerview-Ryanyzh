@@ -28,7 +28,8 @@ public class MsgAdapter extends RecyclerView.Adapter<MsgViewHolder> {
     @NonNull
     @Override
     public MsgViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View item = null;
+        View item = LayoutInflater.from(parent.getContext()).inflate(R.layout.view7, parent, false);
+        /*
         for(User abc : data){
             boolean check = Integer.toString(abc.id).endsWith("7");
             if (check){
@@ -38,6 +39,8 @@ public class MsgAdapter extends RecyclerView.Adapter<MsgViewHolder> {
                 item = LayoutInflater.from(parent.getContext()).inflate(R.layout.view7, null, false);
             }
         }
+        */
+
         return new MsgViewHolder(item);
     }
 
@@ -53,6 +56,12 @@ public class MsgAdapter extends RecyclerView.Adapter<MsgViewHolder> {
         holder.nameID.setText(phrase);
         holder.description.setText(sS.description);
 
+        if (!Integer.toString(sS.id).endsWith("7")){
+            holder.pic.setVisibility(View.GONE);
+        }
+        else{
+            holder.pic.setVisibility(View.VISIBLE);
+        }
 
 
 
